@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ganesh Shreedhar Hotels - Track Order</title>
+    <style>
+        :root {
+            --primary: #2874f0; /* Flipkart Blue */
+            --success: #388e3c;
+            --danger: #d32f2f;
+            --gray: #878787;
+        }
+        body { font-family: Arial, sans-serif; background: #f1f3f6; margin: 0; padding: 20px; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        
+        /* Stepper UI */
+        .track-container { display: flex; justify-content: space-between; margin: 30px 0; position: relative; }
+        .step { text-align: center; flex: 1; z-index: 1; }
+        .step-circle { width: 30px; height: 30px; background: #ddd; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; }
+        .step.active .step-circle { background: var(--success); }
+        .line { position: absolute; top: 15px; left: 10%; right: 10%; height: 2px; background: #ddd; z-index: 0; }
+        
+        /* Buttons & Sections */
+        .btn { padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .btn-track { background: var(--primary); color: white; }
+        .btn-issue { background: white; border: 1px solid #ddd; color: var(--danger); margin-top: 10px; }
+        
+        .section { margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px; }
+        .hidden { display: none; }
+        
+        select, textarea { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; }
+        
+        .footer-info { background: #212121; color: white; padding: 20px; margin-top: 40px; border-radius: 8px; text-align: center; }
+        .history-card { border: 1px solid #eee; padding: 10px; margin-bottom: 10px; border-radius: 4px; display: flex; justify-content: space-between; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Order #GS99283</h2>
+    <p>Delivery Executive: <strong>Rahul S.</strong></p>
+    
+    <button class="btn btn-track" onclick="toggleTrack()">Track Order Status</button>
+
+    <div id="tracking-ui" class="hidden">
+        <div class="track-container">
+            <div class="line"></div>
+            <div class="step active"><div class="step-circle">✓</div><p>Confirmed</p></div>
+            <div class="step active"><div class="step-circle">✓</div><p>Kitchen</p></div>
+            <div class="step"><div class="step-circle">3</div><p>On the Way</p></div>
+            <div class="step"><div class="step-circle">4</div><p>Delivered</p></div>
+        </div>
+        <p style="text-align: center; color: var(--success);">Chef is preparing your meal!</p>
+    </div>
+
+    <div class="section">
+        <h3>Need Help with this Order?</h3>
+        <button class="btn btn-issue" onclick="showElement('issue-box')">Report an Issue / Refund</button>
+        
+        <div id="issue-box" class="hidden">
+            <label>What's the problem?</label>
+            <select id="issue-type">
+                <option value="missing">Missing Food Items</option>
+                <option value="tasteless">Tasteless Food</option>
+                <option value="cold">Food was Cold</option>
+                <option value="refund">Request Refund</option>
+            </select>
+            <textarea placeholder="Describe your issue in detail..."></textarea>
+            <button class="btn btn-track" onclick="alert('Support Request Submitted!')">Submit Issue</button>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3>Order History</h3>
+        <div class="history-card">
+            <div><strong>Paneer Butter Masala</strong><br><small>12 Dec 2024</small></div>
+            <div>₹450 <br> <button class="btn-issue" style="font-size: 10px;" onclick="showElement('feedback-box')">Add Feedback</button></div>
+        </div>
+
+        <h3>Cancelled History</h3>
+        <div class="history-card" style="border-left: 4px solid var(--danger);">
+            <div><strong>Chicken Biryani</strong><br><small>10 Dec 2024</small></div>
+            <div style="color: var(--danger);">Cancelled</div>
+        </div>
+    </div>
+
+    <div id="feedback-box" class="hidden section">
+        <h3>Rate Your Experience</h3>
+        <select>
+            <option>⭐⭐⭐⭐⭐ (Excellent)</option>
+            <option>⭐⭐⭐⭐ (Good)</option>
+            <option>⭐⭐⭐ (Average)</option>
+            <option>⭐⭐ (Poor)</option>
+            <option>⭐ (Bad)</option>
+        </select>
+        <textarea placeholder="Write a review..."></textarea>
+        <button class="btn btn-track" onclick="alert('Thank you for your feedback!')">Submit Feedback</button>
+    </div>
+
+    <div class="footer-info">
+        <p>Customer Care by: <strong>ganeshshreedharhotels.www.com</strong></p>
+        <p>Support Phone: <a href="tel:+919740924081" style="color: #fff;">+91 9740924081</a></p>
+    </div>
+</div>
+
+<script>
+    function toggleTrack() {
+        var x = document.getElementById("tracking-ui");
+        x.classList.toggle("hidden");
+    }
+
+    function showElement(id) {
+        var x = document.getElementById(id);
+        x.classList.remove("hidden");
+        x.scrollIntoView({behavior: "smooth"});
+    }
+</script>
+
+</body>
+</html>
